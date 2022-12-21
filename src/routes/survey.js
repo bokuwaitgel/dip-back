@@ -87,7 +87,7 @@ router.get('/:id/:sur/person', async (req, res) => {
 		let qRes = survey.questions.map(i => QuestionView(i))
 		await qRes.forEach(async (item) => {
 			item.result = [
-				0, 0, 0, 0, 0
+				0, 0, 0, 0, 0, 0, 0, 0, 0, 0
 			]
 			await entries.forEach((i) => {
 				const questionAns = i.answers.find(x => {
@@ -116,7 +116,7 @@ router.get('/:id/result', async (req, res) => {
 		let result = survey.questions.map(i => QuestionView(i))
 		await result.forEach(async (item) => {
 			item.result = [
-				0, 0, 0, 0, 0
+				0, 0, 0, 0, 0, 0, 0, 0, 0, 0
 			]
 			await entries.forEach((i) => {
 				const questionAns = i.answers.find(x => {
@@ -138,7 +138,7 @@ router.get('/:id/result', async (req, res) => {
 })
 
 router.post('/', authAdmin, async (req, res) => {
-	const { title, questions, description, status } = req.body
+	const { title, questions, description, status, type } = req.body
 	try {
 		if (!title)
 			return res.status(400).json({
@@ -148,14 +148,15 @@ router.post('/', authAdmin, async (req, res) => {
 			return res.status(400).json({ 
 				message: 'A survey must have 1 '
 			})
-		if (questions.find(item => !item.options || item.options.length === 0 || item.options.length > 5))
+		if (questions.find(item => !item.options || item.options.length === 0 || item.options.length > 10))
 			return res.status(400).json({
-				message: 'Every survey question must have 1 to 5 options'
+				message: 'Every survey question must have 1 to 10 options'
 			})
 		let questionsRef = await Question.insertMany(questions)
 
 		let survey = new Survey({
 			title,
+			type,
 			description,
 			questions: questionsRef.map(i => i.id),
 			createdBy: req.user.id,

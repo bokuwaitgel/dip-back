@@ -15,6 +15,12 @@ const SurveySchema = mongoose.Schema({
 	questions: [
 		{ type: mongoose.Schema.Types.ObjectId, ref: 'questions' }
 	],
+	resultTilte: {
+		type: String
+	},
+	options : [
+		{ type: mongoose.Schema.Types.ObjectId, ref: 'options' }
+	],
 	status: {
 		type: String,
 		required: true,

@@ -4,6 +4,8 @@ const bodyParser = require('body-parser')
 const user = require('./routes/user') //new addition
 const survey = require('./routes/survey') //new addition
 const entry = require('./routes/entry') //new addition
+const resultSur = require('./routes/result') //new addition
+
 const InitiateMongoServer = require('./config/db')
 
 const app = express()
@@ -22,6 +24,7 @@ app.get('/', (req, res) => {
 app.use('/users', user)
 app.use('/surveys', survey)
 app.use('/entries', entry)
+app.use('/result', resultSur)
 
 app.listen(PORT, () => {
 	console.log(`Server Started at PORT ${PORT}`)

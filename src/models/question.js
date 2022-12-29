@@ -8,6 +8,9 @@ const QuestionSchema = mongoose.Schema({
 	options: [
 		{ type: String }
 	],
+	link: 
+		{ type: String }
+	,
 	createdAt: [
 		{ type: String }
 	],

@@ -5,7 +5,6 @@ const { retakingUser } = require('../utils/validation')
 
 const Entry = require('../models/entry')
 const Survey = require('../models/survey')
-
 const EntryView = require('../views/entry')
 
 router.post('/', setRequestUser, async (req, res) => {
